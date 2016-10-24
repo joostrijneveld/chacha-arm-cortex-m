@@ -49,6 +49,9 @@ lib:
 %.elf: %.o $(OBJS) $(LDSCRIPT)
 	$(LD) -o $(*).elf $(*).o $(OBJS) $(LDFLAGS) -l$(LIBNAME)
 
+measure_chacha%.o: measure_chacha%.c ../common/measure.c
+	$(CC) $(CFLAGS) -o $@ -c $<
+
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $<
 
