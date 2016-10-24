@@ -1,19 +1,25 @@
-## ChaCha permutation on ARM M-series
+# ChaCha permutation on ARM Cortex-M3 and Cortex-M4
 
 The purpose of this repository is to make the ChaCha implementation presented in [1] more easily available, and to present benchmarks for other round numbers. When referring to this implementation, please refer to the canonical white-paper source in which the original ChaCha12 version was published:
 
-> [1] Andreas Hülsing, Joost Rijneveld, and Peter Schwabe. ARMed SPHINCS – Computing a 41 KB signature in 16 KB of RAM. _Public-Key Cryptography – PKC 2016_, LNCS 9614, pp. 446-470, Springer, 2016.
+> [1] Andreas Hülsing, Joost Rijneveld, and Peter Schwabe. ARMed SPHINCS – Computing a 41 KB signature in 16 KB of RAM. _Public-Key Cryptography – PKC 2016_, LNCS 9614, pp. 446-470, Springer, 2016. https://joostrijneveld.nl/papers/armedsphincs/
+
+Note that this code only concerns the ChaCha permutation (i.e. the composition of quadrounds), and not the full ChaCha stream cipher. The latter would require a bit of additional administration for the key and nonce.
 
 ## Compiling
 
-TODO: explain compilation steps, including getting libopencm3
+This project relies on the [arm-none-eabi toolchain](https://launchpad.net/gcc-arm-embedded) and the [libopencm3](https://github.com/libopencm3/libopencm3/) firmware. See [this repository](https://github.com/joostrijneveld/STM32-getting-started) for some more detailed setup instructions and troubleshooting hints. Assuming the before-mentioned is installed, compiling benchmarking binaries can be done by calling e.g. `make measure_chacha12.bin` in the `m3` or `m4` directories. This also generates the assembly implementation as an intermediate result. In order to be able to use the host-side Python script to display the output, make sure the [pyserial](https://github.com/pyserial/pyserial) package is installed.
 
 ## Measuring
 
-TODO: explain setup with STM32 board (pin connections, ttyUSB0)
-
-TODO: explain how to run the measurements using Pyserial
+Connect an USB-to-serial connector (such as the popular PL2303) to `/dev/ttyUSB0`. The code assumes `TX` is connect to `PA3` and `RX` is connected to `PA2`. Run the host-side script `unidirectional.py` to display the output that is received over the serial connection. To flash the binary onto the board using [stlink](https://github.com/texane/stlink): `st-flash write measure_chacha12.bin 0x8000000`.
 
 ## Benchmarks
 
-TODO: include benchmarks for Cortex M3 and M4, for ChaCha{8, 12, 20}
+Running the above produces the following cycle counts for a single ChaCha permutation. Recall that such a permutation processes 64 bytes of input to produce 64 bytes of output.
+
+|            | Cortex-M3 (STM32L100C) | Cortex-M4 (STM32F407)
+| ---------: | :--------------------: | :-------------------:
+|  π-ChaCha8 |          390           |          414
+| π-ChaCha12 |          542           |          572
+| π-ChaCha20 |          846           |          888
