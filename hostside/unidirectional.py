@@ -2,7 +2,7 @@
 import serial
 import sys
 
-dev = serial.Serial("/dev/ttyUSB0", 921600)
+dev = serial.Serial("/dev/ttyUSB0", 115200)
 
 print("> Returned data:", file=sys.stderr)
 

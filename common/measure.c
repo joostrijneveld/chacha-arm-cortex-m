@@ -11,7 +11,8 @@ int main(void)
 
     clock_setup();
     gpio_setup();
-    usart_setup(921600);
+    usart_setup(115200);
+    flash_setup();
 
     SCS_DEMCR |= SCS_DEMCR_TRCENA;
     DWT_CYCCNT = 0;
