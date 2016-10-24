@@ -29,7 +29,7 @@ LDFLAGS		+= --static -Wl,--start-group -lc -lgcc -lnosys -Wl,--end-group \
 		   -L$(OPENCM3_DIR)/lib
 
 .DEFAULT_GOAL := measure_chacha20.bin
-# .PRECIOUS: %.s  # uncomment this to preserve assembly files
+.PRECIOUS: %.s  # preserve generated assembly files
 
 lib:
 	@if [ ! "`ls -A $(OPENCM3_DIR)`" ] ; then \
