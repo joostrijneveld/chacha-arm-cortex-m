@@ -5,7 +5,7 @@ int main(void)
 {
     unsigned char data[64];
     unsigned char digest[64];
-    unsigned char output[128];
+    char output[128];
     unsigned int oldcount, newcount;
     int i;
 
@@ -21,7 +21,7 @@ int main(void)
         data[i] = i;
     }
 
-    sprintf((char *)output, "Benchmarking ChaCha"ROUNDS"..");
+    sprintf(output, "Benchmarking ChaCha"ROUNDS"..");
     send_USART_str(output);
 
     oldcount = DWT_CYCCNT;
@@ -29,10 +29,10 @@ int main(void)
     newcount = DWT_CYCCNT-oldcount;
 
     for(i=0; i < 64; i++) {
-       sprintf((char *)output + 2*i, "%02X", digest[i]);
+       sprintf(output + 2*i, "%02X", digest[i]);
     }
-    send_USART_bytes(output, 128);
-    sprintf((char *)output, "ChaCha"ROUNDS" cost: %d", newcount);
+    send_USART_bytes((unsigned char *)output, 128);
+    sprintf(output, "\nChaCha"ROUNDS" cost: %d", newcount);
     send_USART_str(output);
 
     while(1);

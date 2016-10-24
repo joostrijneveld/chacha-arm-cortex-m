@@ -94,11 +94,11 @@ int dma_done(void)
     return !((DMA1_CCR6 | DMA1_CCR7) & DMA_CCR_EN);
 }
 
-void send_USART_str(const unsigned char* in)
+void send_USART_str(const char* in)
 {
     int i;
     for(i = 0; in[i] != 0; i++) {
-        usart_send_blocking(USART2, in[i]);
+        usart_send_blocking(USART2, (unsigned char)in[i]);
     }
     usart_send_blocking(USART2, '\r');
     usart_send_blocking(USART2, '\n');
