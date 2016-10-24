@@ -1,10 +1,10 @@
 # ChaCha permutation on ARM Cortex-M3 and Cortex-M4
 
-The purpose of this repository is to make the ChaCha implementation presented in [1] more easily available, and to present benchmarks for other round numbers. When referring to this implementation, please refer to the canonical white-paper source in which the original ChaCha12 version was published:
+The purpose of this repository is to make the ChaCha implementation presented in [1] more easily available, and to present benchmarks for other round numbers. When referring to this implementation, please refer to the paper in which it was originally published:
 
 > [1] Andreas Hülsing, Joost Rijneveld, and Peter Schwabe. ARMed SPHINCS – Computing a 41 KB signature in 16 KB of RAM. _Public-Key Cryptography – PKC 2016_, LNCS 9614, pp. 446-470, Springer, 2016. https://joostrijneveld.nl/papers/armedsphincs/
 
-Note that this code only concerns the ChaCha permutation (i.e. the composition of quadrounds), and not the full ChaCha stream cipher. The latter would require a bit of additional administration for the key and nonce.
+Note that this code only concerns the ChaCha permutation (i.e. the composition of quadrounds), and not the full ChaCha stream cipher. The latter would require some additional administration for the key and nonce, as well as adding the keystream to plaintext.
 
 ## Compiling
 
