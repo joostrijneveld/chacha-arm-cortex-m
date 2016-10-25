@@ -1,3 +1,6 @@
 *.d
 *.bin
 *.elf
+common/chacha8.s
+common/chacha12.s
+common/chacha20.s
