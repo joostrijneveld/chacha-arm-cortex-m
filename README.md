@@ -8,6 +8,15 @@ Note that this code only concerns the ChaCha permutation (i.e. the composition o
 
 ## Compiling
 
+Summarizing, compiling the code comes down to the following command sequence;
+
+```
+git submodule update --init
+cd m4
+make lib
+make
+```
+
 This project relies on the [arm-none-eabi toolchain](https://launchpad.net/gcc-arm-embedded) and the [libopencm3](https://github.com/libopencm3/libopencm3/) firmware. See [this repository](https://github.com/joostrijneveld/STM32-getting-started) for some more detailed setup instructions and troubleshooting hints. Assuming the before-mentioned is installed, compiling benchmarking binaries can be done by calling e.g. `make measure_chacha12.bin` in the `m3` or `m4` directories. This also generates the assembly implementation as an intermediate result. In order to be able to use the host-side Python script to display the output, make sure the [pyserial](https://github.com/pyserial/pyserial) package is installed.
 
 ## Measuring
