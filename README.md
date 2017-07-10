@@ -25,7 +25,7 @@ Connect an USB-to-serial connector (such as the popular PL2303) to `/dev/ttyUSB0
 
 ## Benchmarks
 
-Running the above produces the following cycle counts for a single ChaCha permutation. Recall that such a permutation processes 64 bytes of input to produce 64 bytes of output. ROM usage is measured by inspecting the memory footprint of the `chacha{8,12,20}_perm_asm` function in an object dump.
+Running the above produces the following cycle counts for a single ChaCha permutation. Recall that such a permutation processes 64 bytes of input to produce 64 bytes of output. ROM usage is measured by inspecting the memory footprint of the `chacha{8,12,20}_perm_asm` function in an object dump. Note that all code is fully unrolled to optimize for execution speed – the ROM usage can be reduced to only a few hundred bytes (i.e. made constant in the number of rounds) at the cost of only a small number of extra cycles.
 
 |            | Cortex-M3 (STM32L100C), cycles | Cortex-M4 (STM32F407), cycles | ROM usage, bytes
 | ---------: | :----------------------------: | :---------------------------: | :--------------:
